@@ -55,7 +55,7 @@ Das Spiel testet, wie gut ihr euch gegenseitig versteht und auf derselben "Welle
 ## 🚀 Installation & Nutzung
 
 ### Gemeinsam offline spielen:
-Öffnet einfach die `wavelenghtSpiel.html` Datei in eurem Browser - keine Installation notwendig!
+Öffnet einfach die `index.html` Datei in eurem Browser - keine Installation notwendig!
 
 ### Technische Anforderungen
 - Moderner Webbrowser (Chrome, Firefox, Safari, Edge)
