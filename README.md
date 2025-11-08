@@ -53,8 +53,8 @@ Die Zielbereiche haben unterschiedliche Größen - je schwieriger zu treffen, de
 | Treffer | Punkte | Farbe | Größe |
 |---|---|---|---|
 | **Volltreffer** | 5 Punkte | 🟡 Gold | Winzig (±2°) - Super schwer! |
-| **Nah dran** | 3 Punkte | 🔵 Blau | Klein (±12°) - Schwer |
-| **In der Nähe** | 1 Punkt | 🔴 Rot | Mittel (±35°) - Moderat |
+| **Nah dran** | 3 Punkte | 🔵 Blau | Klein (±8°) - Schwer |
+| **In der Nähe** | 1 Punkt | 🔴 Rot | Mittel (±20°) - Mittel |
 | **Daneben** | 0 Punkte | ⚫ Grau | Alles andere |
 
 ## 🎯 Besondere Features
