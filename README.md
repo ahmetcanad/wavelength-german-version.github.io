@@ -6,7 +6,7 @@ Ein browserbasiertes Partyspiel für Teams, inspiriert vom Original-Brettspiel W
 
 **Wavelength** ist ein kooperatives Partyspiel, bei dem Teams versuchen, die Position auf einer verdeckten Skala zwischen zwei gegensätzlichen Konzepten zu erraten. Eine Person gibt Hinweise, das Team diskutiert und platziert gemeinsam einen Zeiger auf dem Spektrum - je näher am Ziel, desto mehr Punkte!
 
-###🎯 Spielprinzip
+## 🎯 Spielprinzip
 
 Das Spiel testet, wie gut ihr euch gegenseitig versteht und auf derselben "Wellenlänge" seid. Die hinweisgebende Person sieht ein verstecktes Ziel auf einer Skala zwischen zwei Gegensätzen (z.B. "Heiß" ↔ "Kalt") und muss einen Begriff nennen, der dem Team hilft, die richtige Position zu erraten.
 
