@@ -1071,55 +1071,29 @@
         updateTeamInputs();
         
         function setTargetArea() {
-            targetAngle = Math.random() * 360;
+        targetAngle = Math.random() * 360;
             
-            // Normalisiere alle Winkel
-            const target = normalizeAngle(targetAngle);
-            const angle1 = normalizeAngle(target - 20);
-            const angle2 = normalizeAngle(target - 8);
-            const angle3 = normalizeAngle(target - 2);
-            const angle4 = normalizeAngle(target + 2);
-            const angle5 = normalizeAngle(target + 8);
-            const angle6 = normalizeAngle(target + 20);
+        // Create a fixed gradient centered at 180°
+        const gradient = `conic-gradient(
+            from ${targetAngle - 180}deg at 50% 50%,
+            #a4b0be 0deg,
+            #a4b0be 160deg,
+            #ff6b6b 160deg,
+            #ff6b6b 172deg,
+            #3742fa 172deg,
+            #3742fa 178deg,
+            #FFD700 178deg,
+            #FFD700 182deg,
+            #3742fa 182deg,
+            #3742fa 188deg,
+            #ff6b6b 188deg,
+            #ff6b6b 200deg,
+            #a4b0be 200deg,
+            #a4b0be 360deg
+        )`;
             
-            // Erstelle Gradient-Strings basierend auf dem Zielwinkel
-            let gradient;
-            
-            // Wenn der Zielwinkel nahe bei 0° liegt, müssen wir den Gradient anders aufbauen
-            if (target < 35 || target > 325) {
-                // Spezialfall für Winkel nahe 0°/360°
-                gradient = `conic-gradient(
-                    from 0deg at 50% 50%,
-                    #ff6b6b ${angle1}deg,
-                    #3742fa ${angle2}deg,
-                    #FFD700 ${angle3}deg,
-                    #FFD700 ${angle4}deg,
-                    #3742fa ${angle5}deg,
-                    #ff6b6b ${angle6}deg,
-                    #a4b0be ${angle6 + 0.1}deg
-                )`;
-            } else {
-                gradient = `conic-gradient(
-                    from 0deg at 50% 50%,
-                    #a4b0be 0deg,
-                    #a4b0be ${angle1}deg,
-                    #ff6b6b ${angle1}deg,
-                    #ff6b6b ${angle2}deg,
-                    #3742fa ${angle2}deg,
-                    #3742fa ${angle3}deg,
-                    #FFD700 ${angle3}deg,
-                    #FFD700 ${angle4}deg,
-                    #3742fa ${angle4}deg,
-                    #3742fa ${angle5}deg,
-                    #ff6b6b ${angle5}deg,
-                    #ff6b6b ${angle6}deg,
-                    #a4b0be ${angle6}deg,
-                    #a4b0be 360deg
-                )`;
-            }
-            
-            targetArea.style.background = gradient;
-        }
+        targetArea.style.background = gradient;
+    }
         
         function setRandomCategories() {
             const randomIndex = Math.floor(Math.random() * categories.length);
