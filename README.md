@@ -73,7 +73,7 @@ Die Zielbereiche haben unterschiedliche Größen - je schwieriger zu treffen, de
 ## 🚀 Installation & Nutzung
 
 ### Gemeinsam spielen:
-Ihr könnt das Spiel auf der [Website](https://ahmetcanad.github.io/wellenrad.github.io/) spielen!
+Ihr könnt das Spiel auf der [Website](https://ahmetcanad.github.io/vibekreis.github.io/) spielen!
 Alternativ könnt ihr auch die `index.html` Datei in eurem Browser öffnen- keine Installation notwendig!
 
 ### Technische Anforderungen
