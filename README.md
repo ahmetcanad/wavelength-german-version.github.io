@@ -1,6 +1,6 @@
 # 🛞 VibeKreis - Ein Partyspiel endlich auch auf Deutsch
 
-Ein browserbasiertes Partyspiel für 1-4 Teams, inspiriert vom Original-Brettspiel Wavelength. Jetzt mit vollem 360°-Kreis und vier Kategorien gleichzeitig! Perfekt für Spieleabende, Partys oder einfach zum Spaß mit Freunden!
+[Der Link zum](https://ahmetcanad.github.io/vibekreis.github.io/) browserbasiertem Partyspiel für 1-4 Teams, inspiriert vom Original-Brettspiel "Wavelength". Jetzt mit vollem 360°-Kreis und vier Kategorien gleichzeitig! Perfekt für Spieleabende, Partys oder einfach zum Spaß mit Freunden!
 
 ## 📖 Über das Spiel
 Wellenrad ist eine erweiterte Variante des kooperativen Partyspiels Wavelength. Teams versuchen, die Position auf einer verdeckten Kreisfläche zwischen vier gleichzeitig angezeigten Konzepten zu erraten. Eine Person gibt Hinweise, das Team diskutiert und platziert gemeinsam einen Zeiger auf dem vollen Kreis - je näher am Ziel, desto mehr Punkte!
