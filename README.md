@@ -1,4 +1,4 @@
-# 🛞 Wellenrad - Ein Partyspiel endlich auch auf Deutsch
+# 🛞 VibeKreis - Ein Partyspiel endlich auch auf Deutsch
 
 Ein browserbasiertes Partyspiel für 1-4 Teams, inspiriert vom Original-Brettspiel Wavelength. Jetzt mit vollem 360°-Kreis und vier Kategorien gleichzeitig! Perfekt für Spieleabende, Partys oder einfach zum Spaß mit Freunden!
 
@@ -115,7 +115,7 @@ Das Original-Brettspiel "Wavelength" ist ein Produkt von CMYK Games. Diese digit
 
 🎉 Viel Spaß beim Spielen!
 ---
-***Seid ihr auf derselben Wellenlän....äh demselbem Wellenrad? 🛞***
+***Seid ihr auf derselben Wellenlän....äh demselbem VibeKreis? 🛞***
 
 **Tipp für Spielleiter:innen:** Wechselt die hinweisgebende Person regelmäßig, damit alle mal dran kommen und ihr verschiedene Perspektiven bekommt!
 
