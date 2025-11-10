@@ -28,15 +28,15 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.444);
             width: 700px;
             height: auto;
-            min-height: 700px;
+            min-height: 780px;
             position: relative;
         }
         
         .title-container {
             position: relative;
             height: 50px;
-            margin-bottom: 30px;
-            margin-top: -20px;
+            margin-bottom: 25px;
+            margin-top: -5px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -153,7 +153,7 @@
         
         .category-label {
             position: absolute;
-            font-size: 12px;
+            font-size: 14px;
             font-weight: bold;
             color: #2f3542;
             padding: 10px 12px;
@@ -181,7 +181,7 @@
         }
         
         .category-label.top {
-            top: -35px;
+            top: -40px;
             left: 50%;
             transform: translateX(-50%) scale(0.8);
             border-color: #3742fa;
@@ -195,7 +195,7 @@
         
         .category-label.right {
             top: 50%;
-            right: -50px;
+            right: -55px;
             left: auto;
             transform: translateY(-50%) scale(0.8);
             border-color: #ff6b6b;
@@ -208,7 +208,7 @@
         }
         
         .category-label.bottom {
-            bottom: -35px;
+            bottom: -40px;
             left: 50%;
             top: auto;
             transform: translateX(-50%) scale(0.8);
@@ -223,7 +223,7 @@
         
         .category-label.left {
             top: 50%;
-            left: -50px;
+            left: -55px;
             transform: translateY(-50%) scale(0.8);
             border-color: #feca57;
             background: linear-gradient(135deg, rgba(255, 243, 227, 0.8) 0%, rgba(255, 255, 255, 0.8) 100%);
@@ -619,24 +619,25 @@
             
             .board-container,
             .board,
-            .target-area,.needle-container {
-                  width: min(75vw, 300px);  /* Changed from 85vw, 350px */
-                  height: min(75vw, 300px);  /* Changed from 85vw, 350px */
-                  margin-bottom: 30px;  /* Changed from 50px */
+            .target-area,
+            .needle-container {
+                width: min(85vw, 350px);
+                height: min(85vw, 350px);
+                margin-bottom: 50px;
             }
             
             .needle {
-                height: min(37.5vw, 140px);  /* Adjusted proportionally */
+                height: min(42.5vw, 165px);
             }
             
             .hanging-title {
-                font-size: min(6vw, 28px);
+                font-size: min(8vw, 32px);
                 padding: 10px 20px;
             }
             
             .title-container {
                 height: 50px;
-                margin-bottom: 20px;
+                margin-bottom: 15px;
             }
             
             .category-label {
@@ -655,15 +656,15 @@
             }
             
             .category-label.left {
-                left: -40px;
+                left: -35px;
             }
             
             .category-label.right {
-                right: -40px;
+                right: -35px;
             }
             
             button {
-                font-size: 12px;
+                font-size: 14px;
                 padding: 10px 15px;
                 max-width: 30%;
             }
@@ -1057,6 +1058,7 @@
             ["Reiselustig", "Heimatverbunden", "Backpacker*in", "Luxus-Urlauber*in"],
             ["Koch-Künstler*in", "Lieferdienst-König*in", "Hobby-Bäcker*in", "Mikrowellen-Magier*in"],
             ["Umweltbewusst", "Konsum-Enthusiast*in", "Zero-Waste-Held*in", "Verpackungs-Liebhaber*in"],
+            ["Zwei linke Hände", "DIY-König*in","Handwerklich begabt" ,"Reparatur-Muffel"],
             ["Gamer*in", "Brettspiel-Fan", "Social-Media-Star", "Digital-Detox-Anhänger*in"],
             ["Qualitätsbewusst", "Schnäppchen-Jäger*in", "Markentreu", "No-Name-Fan"],
             ["Planungs-Fanatiker*in", "Spontaneitäts-Künstler*in", "To-Do-Listen-Gott", "YOLO-Mentalität"],
@@ -1110,9 +1112,7 @@
             ["Ein Job für eine Maschine", "Ein Job für eine*n Künstler*in", "Ein Job für eine*n Politiker*in", "Ein Job, den es nicht mehr gibt"],
             ["Ein Ort, an dem man allein sein will", "Ein Ort für eine riesige Party", "Ein geheimer Ort", "Ein überfüllter Ort"],
             ["Eine Regel, die man brechen sollte", "Eine Regel, die man befolgen sollte", "Eine ungeschriebene Regel", "Eine dumme Regel"],
-            
-            // Haha random Kategorien und wie gut klappt das?
-            ["Pizza", "Rakete", "Kissen", "Dinosaurier"],
+            ["Pizza", "Rakete", "Kissen", "Dinosaurier"], // Ab hier sind random Kategorien
             ["Banane", "Fahrrad", "Wolke", "Socke"],
             ["Käse", "Hubschrauber", "Regenschirm", "Gitarre"],
             ["Kaktus", "Laptop", "Seife", "Pinguin"],
@@ -1176,13 +1176,6 @@
             ["BeReal", "PCR-Test", "Pyjama-Hose", "Wordle"],
             ["Threads", "Lockdown", "Zoom-Fatigue", "Dalgona-Kaffee"]
         ];
-        
-        categories.forEach((quad) => {
-            for (let i = quad.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [quad[i], quad[j]] = [quad[j], quad[i]];
-            }
-        });
         
         const teamSetup = document.getElementById('teamSetup');
         const teamCount = document.getElementById('teamCount');
@@ -1385,35 +1378,36 @@
             updateScoreDisplay();
             
             // Start first round immediately
-                nextRoundButton.click();
-            });
-            
-            
-            function setTargetArea() {
+            nextRoundButton.click();
+        });
+        
+        updateTeamInputs();
+        
+        function setTargetArea() {
             targetAngle = Math.random() * 360;
             
             const gradient = `conic-gradient(
                 from ${targetAngle - 180}deg at 50% 50%,
                 #a4b0be 0deg,
-                #a4b0be 155deg,
-                #ff6b6b 155deg,
-                #ff6b6b 170deg,
-                #3742fa 170deg,
-                #3742fa 177.5deg,
-                #FFD700 177.5deg,
-                #FFD700 182.5deg,
-                #3742fa 182.5deg,
-                #3742fa 190deg,
-                #ff6b6b 190deg,
-                #ff6b6b 205deg,
-                #a4b0be 205deg,
+                #a4b0be 160deg,
+                #ff6b6b 160deg,
+                #ff6b6b 172deg,
+                #3742fa 172deg,
+                #3742fa 178deg,
+                #FFD700 178deg,
+                #FFD700 182deg,
+                #3742fa 182deg,
+                #3742fa 188deg,
+                #ff6b6b 188deg,
+                #ff6b6b 200deg,
+                #a4b0be 200deg,
                 #a4b0be 360deg
             )`;
             
             targetArea.style.background = gradient;
-            }
-            
-            function setRandomCategories() {
+        }
+        
+        function setRandomCategories() {
             let randomIndex;
             let attempts = 0;
             const maxAttempts = categories.length;
@@ -1446,16 +1440,16 @@
         function calculateScore(angle) {
             const normalizedTarget = normalizeAngle(targetAngle);
             const normalizedNeedle = normalizeAngle(angle);
-                
+            
             let diff = Math.abs(normalizedTarget - normalizedNeedle);
             if (diff > 180) diff = 360 - diff;
-                
-            if (diff <= 3) { // Gold zone
+            
+            if (diff <= 3) {
                 triggerConfetti();
                 return 5;
             }
-            if (diff <= 14) return 3;  // Blue zone
-            if (diff <= 38) return 1;  // Red zone
+            if (diff <= 14) return 3;
+            if (diff <= 38) return 1;
             return 0;
         }
         
