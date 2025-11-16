@@ -337,11 +337,29 @@
             gap: 10px;
         }
         
+        .repeatRoundButton {
+            background-color: #feca57;
+            color: #2f3542;
+        }
+        
+        .repeatRoundButton:hover:not(:disabled) {
+            background-color: #28ea86;
+        }
+        
+        .skipRoundButton {
+            background-color: #a4b0be;
+            color: white;
+        }
+        
+        .skipRoundButton:hover:not(:disabled) {
+            background-color: #8395a7;
+        }
+        
         button {
             font-size: 16px;
             padding: 10px 20px;
             cursor: pointer;
-            background-color: #5352ed;
+            background-color: #7c4af1;
             color: white;
             border: none;
             border-radius: 5px;
@@ -351,7 +369,7 @@
         }
         
         button:hover:not(:disabled) {
-            background-color: #3742fa;
+            background-color: #d3a7da;
         }
         
         button:disabled {
@@ -574,18 +592,46 @@
         }
         
         .divider {
-            height: 5px;
+            height: 8px;
             width: 85%;
-            max-width: 400px;
-            margin: 15px auto;
+            max-width: 600px;
+            margin: 18px auto;
             border: 0;
-            border-radius: 2px;
+            border-radius: 999px;
             background: linear-gradient(
                 to right,
-                #ff5d11,
-                hsl(163, 100%, 50%),
-                #f531c0
+                hsl(0 75% 68%),
+                hsl(30 70% 70%),
+                hsl(50 65% 72%),
+                hsl(120 60% 66%),
+                hsl(200 70% 66%),
+                hsl(260 60% 70%),
+                hsl(320 65% 70%)
             );
+            box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+            filter: none;
+            transform: translateZ(0);
+        }
+        
+        .divider-fade {
+            height: 6px;
+            border-radius: 999px;
+            background: linear-gradient(
+                to right,
+                transparent 0%,
+                hsl(0 75% 68%) 8%,
+                hsl(30 70% 70%) 22%,
+                hsl(50 65% 72%) 36%,
+                hsl(120 60% 66%) 52%,
+                hsl(200 70% 66%) 68%,
+                hsl(260 60% 70%) 82%,
+                hsl(320 65% 70%) 92%,
+                transparent 100%
+            );
+            margin: 18px auto;
+            width: 85%;
+            max-width: 600px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.05);
         }
         
         .game-over-modal {
@@ -955,7 +1001,9 @@
         </div>
         <div class="controls">
             <button id="toggleButton">Ziel verbergen</button>
+            <button id="skipRoundButton" style="display: none;">Überspringen</button>
             <button id="nextRoundButton" style="display: none;">Nächste Runde</button>
+            <button id="repeatRoundButton" style="display: none;" class="repeatRoundButton">Wiederholen</button>
             <button id="newGameButton" style="background-color: rgba(208, 36, 36, 0.822); color: white">
                 Neues Spiel
             </button>
@@ -968,27 +1016,32 @@
         const needleContainer = document.getElementById("needleContainer");
         const needle = document.getElementById("needle");
         const targetArea = document.getElementById("targetArea");
-        const toggleButton = document.getElementById("toggleButton");
-        const nextRoundButton = document.getElementById("nextRoundButton");
-        const newGameButton = document.getElementById("newGameButton");
         const scoreElement = document.getElementById("score");
         const totalScoreElement = document.getElementById("totalScore");
         const roundCoverOverlay = document.getElementById("roundCoverOverlay");
-        const startRoundButton = document.getElementById("startRoundButton");
         const errorMessageElement = document.getElementById("errorMessage");
         const countErrorMessageElement = document.getElementById("countErrorMessage");
         const roundCounter = document.getElementById("roundCounter");
         const gameOverModal = document.getElementById("gameOverModal");
         const finalScoresDiv = document.getElementById("finalScores");
+        
+        // Buttons
+        const newGameButton = document.getElementById("newGameButton");
+        const toggleButton = document.getElementById("toggleButton");
+        const nextRoundButton = document.getElementById("nextRoundButton");
+        const repeatRoundButton = document.getElementById("repeatRoundButton");
         const guessCoverOverlay = document.getElementById("guessCoverOverlay");
+        const startRoundButton = document.getElementById("startRoundButton");
         const startGuessButton = document.getElementById("startGuessButton");
-
+        const skipRoundButton = document.getElementById("skipRoundButton");
+        
         // Kategorien-Elemente
         const topCategory = document.getElementById("topCategory");
         const rightCategory = document.getElementById("rightCategory");
         const bottomCategory = document.getElementById("bottomCategory");
         const leftCategory = document.getElementById("leftCategory");
         
+        // Startwerte
         let isDragging = false;
         let targetAngle = 0;
         let isTargetVisible = true;
@@ -1181,7 +1234,25 @@
             ["Ein Job für eine Maschine", "Ein Job für eine*n Künstler*in", "Ein Job für eine*n Politiker*in", "Ein Job, den es nicht mehr gibt"],
             ["Ein Ort, an dem man allein sein will", "Ein Ort für eine riesige Party", "Ein geheimer Ort", "Ein überfüllter Ort"],
             ["Eine Regel, die man brechen sollte", "Eine Regel, die man befolgen sollte", "Eine ungeschriebene Regel", "Eine dumme Regel"],
-            ["Pizza", "Rakete", "Kissen", "Dinosaurier"], // Ab hier sind random Kategorien
+            ["Zahnbürste", "Kamm", "Deo", "Handtuch"],
+            ["E-Mail", "Chat", "Telefonat", "Videocall"],
+            ["Sneaker", "Stiefel", "Sandalen", "Hausschuhe"],
+            ["Park", "Kino", "Café", "Museum"],
+            ["Büro", "Werkstatt", "Labor", "Atelier"],
+            ["Supermarkt", "Bäckerei", "Marktstand", "Online-Shop"],
+            ["Kindheit", "Jugend", "Erwachsenenalter", "Alter"],
+            ["Morgen", "Mittag", "Abend", "Nacht"],
+            ["Idee", "Planung", "Umsetzung", "Reflexion"],
+            ["Anfang", "Mitte", "Höhepunkt", "Ende"],
+            ["Keimling", "Pflanze", "Blüte", "Frucht"],
+            ["Verliebt sein", "Beziehung", "Krise", "Neuanfang"],
+            ["Lesen", "Zocken", "Gärtnern", "Malen"],
+            ["Joggen", "Yoga", "Schwimmen", "Klettern"],
+            ["Gitarre", "Klavier", "Schlagzeug", "Blasinstrument"],
+            ["Kinoabend", "Konzert", "Escape Room", "Picknick"],
+            ["Camping", "Backpacking", "Eigenes Zimmer", "Hotelurlaub"],
+            // Ab hier sind random Kategorien
+            ["Pizza", "Rakete", "Kissen", "Dinosaurier"],
             ["Banane", "Fahrrad", "Wolke", "Socke"],
             ["Käse", "Hubschrauber", "Regenschirm", "Gitarre"],
             ["Kaktus", "Laptop", "Seife", "Pinguin"],
@@ -1686,46 +1757,131 @@
         document.addEventListener("touchend", handleEnd);
         
         toggleButton.addEventListener("click", () => {
-            if (isTargetVisible) {
-                // Verstecke das Ziel
-                isTargetVisible = false;
+            isTargetVisible = !isTargetVisible;
+        
+            if (!isTargetVisible) {
+                // Ziel verbergen - zeige "Rateperson bitte" Overlay
                 targetArea.style.display = "none";
+                hideCategories();
                 toggleButton.style.display = "none";
                 scoreElement.textContent = "";
                 nextRoundButton.style.display = "none";
-
-                // Verstecke die Kategorien für die ratende Person
-                hideCategories();
-                hideNeedle();  // Verstecke die Nadel auch zuerst
-
-                // Zeige das Cover für die ratende Person
+                repeatRoundButton.style.display = "none";
+                skipRoundButton.style.display = "none";
+                
+                // Zeige das Guess Cover Overlay
                 guessCoverOverlay.classList.add('show');
                 guessCoverOverlay.style.display = 'flex';
+                
             } else {
-                // Zeige das Ziel wieder (für Aufdecken)
-                isTargetVisible = true;
+                // Ziel aufdecken - zeige Ergebnis
                 targetArea.style.display = "block";
-                toggleButton.style.display = "none";
-
-                // Zeige die Kategorien wieder beim Aufdecken
                 showCategories();
-
+                toggleButton.style.display = "none";
+                skipRoundButton.style.display = "none";
                 const score = calculateScore(currentNeedleAngle);
                 teams[currentTeamIndex].score += score;
                 scoreElement.textContent = `${teams[currentTeamIndex].name} erzielt: ${score} Punkte`;
                 updateScoreDisplay();
                 canMoveNeedle = false;
                 nextRoundButton.style.display = "inline-block";
+                
+                if (gameMode === 'endless') {
+                    repeatRoundButton.style.display = "inline-block";
+                }
             }
         });
-
+        
+        startRoundButton.addEventListener('click', () => {
+            hideRoundCover();
+            
+            // Zeige Target und Kategorien
+            targetArea.style.display = "block";
+            isTargetVisible = true;
+            showCategories();
+            toggleButton.style.display = "inline-block";
+            toggleButton.textContent = "Ziel verbergen";
+            
+            // Zeige Skip Button direkt für Endlos-Modus
+            if (gameMode === 'endless') {
+                skipRoundButton.style.display = "inline-block";
+            }
+        });
+        
+        startGuessButton.addEventListener('click', () => {
+            guessCoverOverlay.classList.remove('show');
+            setTimeout(() => {
+                guessCoverOverlay.style.display = 'none';
+            }, 300);
+            
+            toggleButton.style.display = "inline-block";
+            toggleButton.textContent = "Ziel aufdecken";
+            showNeedle();
+            canMoveNeedle = true;
+            
+            // Skip Button bleibt während des Ratens sichtbar im Endlos-Modus
+            if (gameMode === 'endless') {
+                skipRoundButton.style.display = "inline-block";
+            }
+        });
+        
+        // Verstecke alles
+        repeatRoundButton.addEventListener("click", () => {
+            hideCategories();
+            targetArea.style.display = "none";
+            toggleButton.style.display = "none";
+            needle.style.transform = "translate(-50%, -100%) rotate(0deg)";
+            currentNeedleAngle = 0;
+            scoreElement.textContent = "";
+            hideNeedle();
+            canMoveNeedle = false;
+            nextRoundButton.style.display = "none";
+            repeatRoundButton.style.display = "none";
+            skipRoundButton.style.display = "none";
+            
+            // Generiere neues Ziel (aber behalte Kategorien)
+            setTargetArea();
+            
+            // Zeige "Hinweisperson bitte" Overlay
+            showRoundCover();
+        });
+        
+        // Überspringe ohne Punkte zu vergeben
+        skipRoundButton.addEventListener("click", () => {
+            // Create skip overlay similar to round cover
+            const skipOverlay = document.createElement('div');
+            skipOverlay.className = 'round-cover-overlay show';
+            skipOverlay.style.display = 'flex';
+            skipOverlay.innerHTML = `
+                <div class="round-cover-text">Runde wird übersprungen - keine Punkte!</div>
+            `;
+            document.body.appendChild(skipOverlay);
+                
+            // Hide buttons
+            skipRoundButton.style.display = "none";
+            toggleButton.style.display = "none";
+            repeatRoundButton.style.display = "none";
+                
+            if (teams.length > 0) {
+                currentTeamIndex = (currentTeamIndex + 1) % teams.length;
+                updateScoreDisplay();
+            }
+            
+            setTimeout(() => {
+                // Remove overlay and continue
+                document.body.removeChild(skipOverlay);
+                nextRoundButton.click();
+            }, 1500);
+        });
+                
+        
+        // Keine Punkte bei der ersten Runde erhöhen
         nextRoundButton.addEventListener("click", () => {
-            // Don't increment currentTurn on the very first round
             if (!isFirstRound) {
                 currentTurn++;
             }
             isFirstRound = false;
-
+            
             if (gameMode === 'rounds' && teams.length > 0) {
                 // Check if all teams have played this round
                 if (currentTurn > 0 && currentTurn % teams.length === 0) {
@@ -1737,26 +1893,26 @@
                 }
                 updateRoundCounter();
             }
-
-            // VERSTECKE ALLES ZUERST
-            hideCategories();
-            targetArea.style.display = "none";  // Verstecke das Target sofort
-            hideNeedle();
-
-            // Bereite die neue Runde vor
-            setTargetArea();
-            setRandomCategories();
-            needle.style.transform = "translate(-50%, -100%) rotate(0deg)";
-            currentNeedleAngle = 0;
-            scoreElement.textContent = "";
-            canMoveNeedle = false;
-            toggleButton.style.display = "none";  // Verstecke den Button
-            nextRoundButton.style.display = "none";
-
-            if (teams.length > 0) {
-                currentTeamIndex = (currentTeamIndex + 1) % teams.length;
-                updateScoreDisplay();
-            }
+        
+        
+        // VERSTECKE ALLES ZUERST
+        hideCategories();
+        targetArea.style.display = "none";  // Verstecke das Target sofort
+        hideNeedle();
+        
+        // Bereite die neue Runde vor
+        setTargetArea();
+        setRandomCategories();
+        needle.style.transform = "translate(-50%, -100%) rotate(0deg)";
+        currentNeedleAngle = 0;
+        scoreElement.textContent = "";
+        canMoveNeedle = false;
+        toggleButton.style.display = "none";  // Verstecke den Button
+        nextRoundButton.style.display = "none";
+        if (teams.length > 0) {
+            currentTeamIndex = (currentTeamIndex + 1) % teams.length;
+            updateScoreDisplay();
+        }
 
             // Zeige das Cover
             showRoundCover();
